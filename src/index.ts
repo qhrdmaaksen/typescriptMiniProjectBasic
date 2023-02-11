@@ -10,3 +10,6 @@ const btn = document.getElementById("btn")!
 btn?.addEventListener("click", ()=>{
 	alert("CLICKED!")
 })
+
+
+// DOM 으로 타입 단언하기
