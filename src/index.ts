@@ -19,9 +19,14 @@ const handleSubmit = (e: SubmitEvent) => {
 	e.preventDefault()
 	console.log('submit')
 	const newTodoText = input.value
-	// 새로운 li 태그 생성
-	const newLI = document.createElement("LI")
+	// 동적 새로운 li 태그 생성
+	const newLI = document.createElement("li")
+	// 동적 생성된 li 태그에 checkbox 생성
+	const checkbox = document.createElement("input")
+	// typescript 가 checkbox 를 checkbox 로 인식하도록 type 설정
+	checkbox.type = 'checkbox'
 	newLI.append(newTodoText)
+	newLI.append(checkbox)
 	list.append(newLI)
 	input.value = ''
 }
