@@ -19,6 +19,7 @@ const handleSubmit = (e: SubmitEvent) => {
 	e.preventDefault()
 	console.log('submit')
 	const newTodoText = input.value
+	// 새로운 li 태그 생성
 	const newLI = document.createElement("LI")
 	newLI.append(newTodoText)
 	list.append(newLI)
