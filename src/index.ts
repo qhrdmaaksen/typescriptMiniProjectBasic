@@ -23,7 +23,9 @@ const form = document.querySelector("form")!
 
 const list = document.getElementById('todolist')!
 
-
+// 로컬 스토리지에서 todos 라는 키값으로 저장된 데이터를 가져옴
+const todosJSON = localStorage.getItem("todos")
+console.log(JSON.parse(todosJSON))
 
 // e: SubmitEvent 는 이벤트 객체를 받아오는데 이벤트 객체는 타입스크립트에서 기본적으로 제공하지 않기때문에 직접 타입을 지정해줘야함
 const handleSubmit = (e: SubmitEvent) => {
@@ -38,6 +40,10 @@ const handleSubmit = (e: SubmitEvent) => {
 	createTodo(newTodo)
 	// todos 배열에 newTodo 객체를 추가
 	todos.push(newTodo)
+
+	// typescript 가 타입 인식할 수 있도록 JSON.stringify 로 todos 문자열화토록함
+	localStorage.setItem("todos", JSON.stringify(todos))
+
 	input.value = ''
 }
 
