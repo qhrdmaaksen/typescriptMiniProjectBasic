@@ -10,9 +10,6 @@ interface Todo {
 	completed: boolean,
 }
 
-// 할일 목록과 배열은 Todo type 의 배열이라고 알려주기 위해 Todo[] 타입을 사용
-const todos: Todo[] = []
-
 // non null 단언 연산자 ! 를 사용하면 값이 존재한다고 타입스크립트에게 알려줌
 const btn = document.getElementById("btn")! as HTMLButtonElement
 // DOM 으로 타입 단언/ 별칭 HTMLInputElement 타입 단언 사용
@@ -23,9 +20,16 @@ const form = document.querySelector("form")!
 
 const list = document.getElementById('todolist')!
 
-// 로컬 스토리지에서 todos 라는 키값으로 저장된 데이터를 가져옴
-const todosJSON = localStorage.getItem("todos")
-console.log(JSON.parse(todosJSON))
+// readTodos 함수를 호출하면 Todo type 배열을 반환하게 됨, 해당 배열은 비어있거나 Todo 항목이 들어있을수있으며 Todo 항목을 읽어올수있음
+const todos: Todo[] = readTodos()
+todos.forEach(createTodo)
+
+function readTodos(): Todo[] {
+	// 로컬 스토리지에서 todos 라는 키값으로 저장된 데이터를 가져옴
+	const todosJSON = localStorage.getItem("todos")
+	if (todosJSON === null) return [];
+	return JSON.parse(todosJSON)
+}
 
 // e: SubmitEvent 는 이벤트 객체를 받아오는데 이벤트 객체는 타입스크립트에서 기본적으로 제공하지 않기때문에 직접 타입을 지정해줘야함
 const handleSubmit = (e: SubmitEvent) => {
@@ -47,7 +51,7 @@ const handleSubmit = (e: SubmitEvent) => {
 	input.value = ''
 }
 
-const createTodo = (todo: Todo) => {
+function createTodo(todo: Todo) {
 	// 동적 새로운 li 태그 생성
 	const newLI = document.createElement("li")
 	// 동적 생성된 li 태그에 checkbox 생성
