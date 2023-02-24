@@ -61,6 +61,10 @@ function createTodo(todo: Todo) {
 	// typescript 가 checkbox 를 checkbox 로 인식하도록 type 설정
 	checkbox.type = 'checkbox';
 	checkbox.checked = todo.completed;
+	checkbox.addEventListener("change", function(){
+		todo.completed = checkbox.checked;
+		saveTodos()
+	})
 	newLI.append(todo.text)
 	newLI.append(checkbox)
 	list.append(newLI)
